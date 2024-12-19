@@ -1,9 +1,13 @@
 import { useRouter } from 'next/router';
 import Logo from './Logo';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
+import { useState } from 'react';
 
 const Header = () => {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigation = [
     { name: 'About Us', href: '/about' },
@@ -13,6 +17,11 @@ const Header = () => {
     { name: 'Get Involved', href: '/get-involved' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  const handleNavigation = (href: string) => {
+    setIsOpen(false);
+    router.push(href);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/20 backdrop-blur-sm">
@@ -38,9 +47,29 @@ const Header = () => {
             ))}
           </nav>
 
-          <Button className="md:hidden" variant="outline">
-            Menu
-          </Button>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="w-[300px] sm:w-[400px] bg-background border-l border-primary/20">
+              <nav className="flex flex-col space-y-4 mt-8">
+                {navigation.map((item) => (
+                  <Button
+                    key={item.name}
+                    variant="ghost"
+                    className={`w-full justify-start text-lg ${
+                      router.pathname === item.href ? 'text-primary border-l-2 border-primary pl-4' : 'text-muted-foreground'
+                    }`}
+                    onClick={() => handleNavigation(item.href)}
+                  >
+                    {item.name}
+                  </Button>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

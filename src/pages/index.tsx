@@ -11,10 +11,8 @@ export default function Home() {
       description="Join the revolution of women in esports. CyberQueen is your platform for growth, community, and success in competitive gaming."
     >
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center overflow-hidden -mt-8">
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10"></div>
-        <div className="absolute inset-0 bg-[url('/images/rect.png')] bg-cover bg-center opacity-20"></div>
-        <div className="container mx-auto px-4 z-20">
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-primary animate-pulse">
               Empowering Women in Esports
